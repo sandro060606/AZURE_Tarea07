@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
+const path = require('path')
 
 const sentimientoRoutes = require('./Routes/sentimientoRoutes')
 const ocrRoutes = require('./Routes/ocrRoutes')
@@ -11,15 +12,18 @@ const PORT = process.env.PORT || 3000
 // Middlewares
 app.use(cors())
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-    res.json({
-        mensaje: 'API de Azure - TAREA 07',
-        endpoints: {
-            sentimiento: 'POST /api/sentimiento/analizar',
-            ocr: 'POST /api/ocr/leer'
-        }
-    })
+    res.sendFile(path.join(__dirname, 'public', 'html/index.html')) 
+})
+
+app.get('/sentimientos', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html/sentimiento.html'))
+})
+
+app.get('/ocr', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'html/ocr.html'))
 })
 
 app.use('/api/sentimiento', sentimientoRoutes)
