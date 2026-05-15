@@ -1,6 +1,7 @@
 const btnAnalizar = document.getElementById('btnAnalizar')
 const textoInput = document.getElementById('texto')
 const resultado = document.getElementById('resultado')
+const loading = document.getElementById('loading')
 const error = document.getElementById('error')
 
 btnAnalizar.addEventListener('click', async () => {
@@ -13,6 +14,7 @@ btnAnalizar.addEventListener('click', async () => {
     }
 
     ocultarTodo()
+    loading.style.display = 'block'
 
     try {
         const response = await fetch('/api/sentimiento/analizar', {
@@ -33,6 +35,8 @@ btnAnalizar.addEventListener('click', async () => {
 
     } catch (err) {
         mostrarError(err.message)
+    } finally {
+        loading.style.display = 'none'
     }
 })
 
@@ -61,6 +65,7 @@ function mostrarError(mensaje) {
 function ocultarTodo() {
     resultado.style.display = 'none'
     error.style.display = 'none'
+    if (loading) loading.style.display = 'none'
 }
 
 function traducirSentimiento(sentimiento) {

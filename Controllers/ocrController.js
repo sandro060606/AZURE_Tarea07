@@ -1,4 +1,4 @@
-const ocr = require('../Services/ocr')
+const ocr = require('../services/ocr')
 
 const leerImagen = async (req, res) => {
     try {

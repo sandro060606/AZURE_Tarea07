@@ -3,8 +3,8 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 
-const sentimientoRoutes = require('./Routes/sentimientoRoutes')
-const ocrRoutes = require('./Routes/ocrRoutes')
+const sentimientoRoutes = require('./routes/sentimientoRoutes')
+const ocrRoutes = require('./routes/ocrRoutes')
 
 const app = express()
 const PORT = process.env.PORT || 3000
